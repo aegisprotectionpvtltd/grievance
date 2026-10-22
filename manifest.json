@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Aegis Grievance Portal",
-  "short_name": "Grievance",
+  "name": "Aegis App",
+  "short_name": "App",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

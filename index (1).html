@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aegis App</title>
+<meta name="theme-color" content="#ffffff">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="App">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+  html, body { margin: 0; height: 100%; background: #ffffff; }
+  #app { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; }
+  #loading { position: fixed; inset: 0; z-index: 2; background: #ffffff; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px; font: 15px/1.4 -apple-system, Roboto, Arial, sans-serif; color: #5d6676; }
+  #loading img { width: 160px; height: 160px; }
+</style>
+</head>
+<body>
+<div id="loading"><img src="icon-512.png" alt="Aegis Protection Pvt. Ltd."><div>Loading…</div></div>
+<iframe id="app" title="Aegis App"></iframe>
+<script>
+  // The portal itself (Google Apps Script). Change this only if the portal's link changes.
+  var APP_URL = 'https://script.google.com/macros/s/AKfycby7wcg55eMVWW4s1-Q-roonSw8cWSD6_99wpFfVrr-KaUxgMVpc6tkw3VgI_4mJCAM/exec';
+  var view = new URLSearchParams(location.search).get('view');
+  var frame = document.getElementById('app');
+  var loading = document.getElementById('loading');
+  var hide = function () { if (loading) { loading.remove(); loading = null; } };
+  frame.addEventListener('load', hide);
+  setTimeout(hide, 8000);
+  frame.src = APP_URL + (view === 'admin' || view === 'team' || view === 'aegis' ? '?view=' + view : '');
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+</script>
+</body>
+</html>
